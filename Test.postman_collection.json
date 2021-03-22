@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "dea37d4a-5c33-4d87-aa56-38e930430e9e",
+		"name": "Test",
+		"description": "Test 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test 3a",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "22812fe7-223f-40c3-82bc-e42da470bc66",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body contains string\",() => {",
+							"  pm.expect(pm.response.text()).to.include(\"rocket\");",
+							"});",
+							"",
+							"pm.test(\"The response has all properties\", () => {",
+							"    //parse the response json and test three properties",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.details).to.eql('This mission launches the 21st batch of operational Starlink satellites, which are version 1.0, from LC-39A or SLC-40. It is the 22nd Starlink launch overall. The satellites will be delivered to low Earth orbit and will spend a few weeks maneuvering to their operational altitude. The booster is expected to land on an ASDS.');",
+							"    pm.expect(responseJson.ships).to.be.a('5ea6ed2e080df4000697c909');",
+							"    pm.expect(responseJson.flight_number).to.be.a('120');",
+							"    });",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.spacexdata.com/v4/launches/latest",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spacexdata",
+						"com"
+					],
+					"path": [
+						"v4",
+						"launches",
+						"latest"
+					]
+				},
+				"description": "Get"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
